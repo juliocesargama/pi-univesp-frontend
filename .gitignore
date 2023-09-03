@@ -26,6 +26,5 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-vercel.json
-vite.config.ts
+
 
