@@ -6,10 +6,10 @@
             </div>
             <div class="card-body">
 
-                <ul class="alert alert-warning" v-if="errorList.length > 0">
-                    <li class="mb-0 ms-3">
+                <ul class="alert alert-danger" v-if="errorList.length > 0">
+                    <div class="mb-0 ms-3">
                         {{ errorList }}
-                </li>
+                    </div>
             </ul>
                 <div class="mb-3">
                     <label for="">Nome</label>
