@@ -28,7 +28,7 @@
                 </div>
                 <div class="float-end">
                     <button type="button" @click="saveItem" class="btn btn-primary m-2">Salvar</button>
-                    <button type="reset" class="btn btn-secondary">Cancelar</button>
+                    <button type="reset" @click="cancelForm" class="btn btn-secondary">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -61,7 +61,6 @@ export default {
     },
     methods: {
         saveItem() {
-
             var $this = this;
             var url = '/api/item/save'
             axios.post(url,{
@@ -73,10 +72,17 @@ export default {
                 this.$router.push('/items')
             })
             .catch(function (error){
-                if(error.response.status == 400 || error.response.status == 500){
-                   $this.errorList = error.message
+                if(error.response.status == 400){
+                   $this.errorList = "Ocorreu um erro ao salvar o item, verifique o preenchimento de todos os campos e tente novamente."
+                } else if(error.response.status == 500){
+                    $this.errorList = "Ocorreu um erro interno no servidor, tente novamente mais tarde."
+                } else {
+                    $this.errorList = "Ocorreu um erro desconhecido, tente novamente mais tarde."
                 }
             })
+        },
+        cancelForm() {
+            this.$router.push('/items')
         }
     }
 
