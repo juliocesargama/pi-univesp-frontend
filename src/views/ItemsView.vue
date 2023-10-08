@@ -17,11 +17,11 @@
                         </tr>
                     </thead>
                     <tbody v-if="items.length > 0">
-                        <tr v-for="item in items" :key="item._id">
+                        <tr v-for="item in items" :key="item.id">
                             <td>{{ item.name }}</td>
                             <td>{{ item.description }}</td>
                             <td>{{ item.status }}</td>
-                            <td><RouterLink to="/" class="btn btn-primary">Alterar</RouterLink></td>
+                            <td><RouterLink :to="{path: '/items/'+item.id+'/edit'}" class="btn btn-primary">Alterar</RouterLink></td>
                         </tr>
                     </tbody>
                     <tbody v-else>
@@ -38,11 +38,8 @@
 <script lang="ts">
 import axios from "axios";
 import { type Item } from "../model/Item";
-import ItemStatus from "../model/ItemStatus";
 
 export default {
-
-    itemStatus: ItemStatus,
 
     name: 'items-view',
     data() {

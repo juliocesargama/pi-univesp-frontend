@@ -4,7 +4,7 @@ import ItemsViewVue from '../views/ItemsView.vue'
 import ApplicantsViewVue from '@/views/ApplicantsView.vue'
 import LoansViewVue from '@/views/LoansView.vue'
 import ItemsInputView from '@/views/inputs/ItemsInputView.vue'
-
+import ItemsEditView from '@/views/inputs/ItemsEditView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/items/create',
       name: 'items-input',
       component: ItemsInputView
+    },
+    {
+      path: '/items/:id/edit',
+      name: 'items-edit',
+      component: ItemsEditView
     },
     {
       path: '/applicants',
