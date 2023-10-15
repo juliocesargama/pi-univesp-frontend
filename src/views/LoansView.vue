@@ -2,7 +2,9 @@
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h3>Empréstimos</h3>
+                <h3>Empréstimos
+                    <RouterLink to="/loans/create" class="btn btn-primary float-end">Novo Empréstimo</RouterLink>
+                </h3>
             </div>
             <div class="card-body text-center m-5">
                 Ações para empréstimos serão desenvolvidas em breve.

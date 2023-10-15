@@ -7,6 +7,8 @@ import ItemsInputView from '@/views/inputs/ItemsInputView.vue'
 import ItemsEditView from '@/views/inputs/ItemsEditView.vue'
 import ApplicantsInputView from '@/views/inputs/ApplicantsInputView.vue'
 import ApplicantsEditView from '@/views/inputs/ApplicantsEditView.vue'
+import LoansInputView from '@/views/inputs/LoansInputView.vue'
+import AboutViewVue from '@/views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,7 +21,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/AboutView.vue')
+      component: AboutViewVue
     },
     {
       path: '/items',
@@ -52,9 +54,14 @@ const router = createRouter({
       component: ApplicantsEditView
     },
     {
-    path: '/loans',
+      path: '/loans',
       name: 'loans',
       component: LoansViewVue
+    },
+    {
+      path: '/loans/create',
+      name: 'loans-input',
+      component: LoansInputView
     }
   ]
 })
