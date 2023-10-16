@@ -1,6 +1,0 @@
-export interface Loan {
-    id: number;
-    itemId: number;
-    applicantId: number;
-    devolutionDays: number;
-}
