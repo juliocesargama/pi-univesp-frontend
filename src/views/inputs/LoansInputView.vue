@@ -21,7 +21,7 @@
                     <select v-model="model.loan.itemId" size="5" class="form-select form-control">
                         <option disabled value="">Selecione...</option>
                         <option v-for="item in items" :key="item.id" :value="item.id"
-                            :disabled="item.status == 'Emprestado'">{{ item.name
+                            :disabled="item.status != 'Disponivel'">{{ item.name
                             }}</option>
                     </select>
                     <label for="">Dias para devolução</label>
@@ -49,9 +49,9 @@ export default {
             items: [] as Item[],
             model: {
                 loan: {
-                    itemId: '',
-                    applicantId: '',
-                    devolutionDays: ''
+                    itemId: 0,
+                    applicantId: 0,
+                    devolutionDays: 0
                 }
             },
         }
@@ -81,7 +81,7 @@ export default {
                     alert(result.data.message)
                     this.$router.push('/loans')
                 }).catch(function (error) {
-                    if (error.response.status == 400) {
+                    if (error.response.status == 400 || error.response.status == 404) {
                         $this.errorList = error.response.data.message
                     } else if (error.response.status == 500) {
                         $this.errorList = "Ocorreu um erro interno no servidor, tente novamente mais tarde."

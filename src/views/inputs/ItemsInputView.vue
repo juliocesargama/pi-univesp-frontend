@@ -72,7 +72,7 @@ export default {
                 this.$router.push('/items')
             })
             .catch(function (error){
-                if(error.response.status == 400){
+                if(error.response.status == 400 || error.response.status == 404){
                    $this.errorList = "Ocorreu um erro ao salvar o item, verifique o preenchimento de todos os campos e tente novamente."
                 } else if(error.response.status == 500){
                     $this.errorList = "Ocorreu um erro interno no servidor, tente novamente mais tarde."
