@@ -2,9 +2,15 @@
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h3>Empréstimos
-                    <RouterLink to="/loans/create" class="btn btn-primary float-end">Novo Empréstimo</RouterLink>
-                </h3>
+                <div class="d-flex">
+                    <h3 class="me-auto m-2">Empréstimos</h3>
+                    <select class="form-select m-2" v-model="status" style="width: 200px;" @change="setFilterStatus()">
+                        <option value="" disabled selected>Filtro</option>
+                        <option v-for="(status, index) in loanStatus" :key="status" :value="status">{{ status }}</option>
+
+                    </select>
+                    <RouterLink to="/loans/create" class="btn btn-primary m-2">Novo Empréstimo</RouterLink>
+                </div>
             </div>
             <div class="card-body">
                 <table class="table">
@@ -32,9 +38,14 @@
                             </td>
                         </tr>
                     </tbody>
-                    <tbody v-else>
+                    <tbody v-else-if="notFoundParams == true">
                         <tr>
-                            <td colspan="4">Carregando Empréstimos...</td>
+                            <td colspan="6">Nenhum Empréstimo Encontrado nos parâmetros definidos.</td>
+                        </tr>
+                    </tbody>
+                    <tbody v-else-if="notFoundParams == false">
+                        <tr>
+                            <td colspan="6">Carregando Empréstimos...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -52,16 +63,26 @@ export default {
     name: 'loans-view',
     data() {
         return {
-            loans: [] as Loan[]
+            status: '',
+            notFoundParams: false,
+            loans: [] as Loan[],
+            loanStatus: [
+                'Todos',
+                'Andamento',
+                'Atrasado',
+                'Devolvido'
+            ]
         }
     },
     mounted() {
+        this.checkDelayed();
         this.getLoans("Todos")
     },
     methods: {
         getLoans(status: string) {
             var url = '/api/loan/find/' + status;
-            return axios.get(url).then(result => this.loans = result.data);
+            var result = axios.get(url).then(result => this.loans = result.data);
+            return result;
         },
         setDevolution(loanId: number) {
             var url = '/api/devolution/' + loanId;
@@ -69,6 +90,19 @@ export default {
                 alert(result.data.message);
                 this.getLoans("Todos");
             });
+        },
+        setFilterStatus() {
+
+            var response = this.getLoans(this.status).then(result => {
+                if (result.data == null) {
+                    this.notFoundParams = true;
+                } 
+            });
+            return response;
+        },
+        checkDelayed() {
+            var url = '/api/loan/check-delayed';
+            return axios.post(url).then(result => console.log(result.data.message));
         }
     },
 }
