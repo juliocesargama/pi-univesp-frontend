@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Items
-                    <RouterLink to="/items/create" class="btn btn-primary float-end">Novo Item</RouterLink>
+                    <RouterLink to="/items/create" class="btn btn-primary float-end" aria-describedby="Botão para criar novo item">Novo Item</RouterLink>
                 </h3>
             </div>
             <div class="card-body">
@@ -21,7 +21,7 @@
                             <td>{{ item.name }}</td>
                             <td>{{ item.description }}</td>
                             <td>{{ item.status }}</td>
-                            <td><RouterLink :to="{path: '/items/'+item.id+'/edit'}" class="btn btn-primary">Alterar</RouterLink></td>
+                            <td><RouterLink :to="{path: '/items/'+item.id+'/edit'}" class="btn btn-primary" aria-label="Botão de alterar dados do item">Alterar</RouterLink></td>
                         </tr>
                     </tbody>
                     <tbody v-else>

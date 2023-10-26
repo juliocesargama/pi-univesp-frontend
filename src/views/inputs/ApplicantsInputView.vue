@@ -39,8 +39,8 @@ export default {
             errorList: '',
             model: {
                 applicant: {
-                    name: '',
-                    phone: ''
+                    name: null,
+                    phone: null
                 }
             }
         }
