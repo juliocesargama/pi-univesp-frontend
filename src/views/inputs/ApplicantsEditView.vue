@@ -2,26 +2,28 @@
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                <h3>Alterar Requerente</h3>
+                <h3 aria-label="Alteração de dados de requerente existente">Alterar Requerente</h3>
             </div>
             <div class="card-body">
 
                 <ul class="alert alert-danger" v-if="errorList.length > 0">
                     <div class="mb-0 ms-3">
-                        {{ errorList }}
+                        <ul>
+                            <li v-for="error in errorList">{{ error }}</li>
+                        </ul>
                     </div>
                 </ul>
                 <div class="mb-3">
-                    <label for="">Nome</label>
-                    <input type="text" v-model="model.applicant.name" class="form-control">
+                    <label aria-label="Nome do requetente">Nome</label>
+                    <input type="text" v-model="model.applicant.name" class="form-control" aria-describedby="Campo texto para inserir novo nome do requerente">
                 </div>
                 <div class="mb-3">
-                    <label for="">Telefone</label>
-                    <input type="text" v-model="model.applicant.phone" class="form-control">
+                    <label aria-label="Telefone do requerente">Telefone</label>
+                    <input type="text" v-model="model.applicant.phone" class="form-control" aria-describedby="Campo texto para inserir novo telefone do requerente">
                 </div>
                 <div class="float-end">
-                    <button type="button" @click="saveApplicant" class="btn btn-primary m-2">Salvar</button>
-                    <button type="reset" @click="cancelForm" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" @click="checkForm" class="btn btn-primary m-2" aria-describedby="Botão para salvar novos dados do requerente">Salvar</button>
+                    <button type="reset" @click="cancelForm" class="btn btn-secondary" aria-describedby="Botão para cancelar o formulário">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -36,7 +38,7 @@ export default {
     name: 'applicantEditView',
     data() {
         return {
-            errorList: '',
+            errorList: [] as string[],
             model: {
                 applicant: {
                     name: '',
@@ -63,11 +65,11 @@ export default {
                 })
                 .catch(function (error) {
                     if (error.response.status == 400) {
-                        $this.errorList = "Ocorreu um erro ao salvar o requerente, verifique o preenchimento de todos os campos e tente novamente."
+                        $this.errorList.push("Ocorreu um erro ao salvar o requerente, verifique o preenchimento de todos os campos e tente novamente.")
                     } else if (error.response.status == 500) {
-                        $this.errorList = "Ocorreu um erro interno no servidor, tente novamente mais tarde."
+                        $this.errorList.push("Ocorreu um erro interno no servidor, tente novamente mais tarde.")
                     } else {
-                        $this.errorList = "Ocorreu um erro desconhecido, tente novamente mais tarde."
+                        $this.errorList.push("Ocorreu um erro desconhecido, tente novamente mais tarde.")
                     }
                 })
         },
@@ -81,17 +83,30 @@ export default {
                 })
                 .catch(function (error) {
                     if (error.response.status == 400) {
-                        $this.errorList = "Ocorreu um erro ao buscar o requerente, verifique o preenchimento de todos os campos e tente novamente."
+                        $this.errorList.push("Ocorreu um erro ao buscar o requerente, verifique o preenchimento de todos os campos e tente novamente.")
                     } else if (error.response.status == 500) {
-                        $this.errorList = "Ocorreu um erro interno no servidor, tente novamente mais tarde."
+                        $this.errorList.push("Ocorreu um erro interno no servidor, tente novamente mais tarde.")
                     } else {
-                        $this.errorList = "Ocorreu um erro desconhecido, tente novamente mais tarde."
+                        $this.errorList.push("Ocorreu um erro desconhecido, tente novamente mais tarde.")
                     }
                 })
         },
         cancelForm() {
             this.$router.push('/applicants')
         },
+        checkForm: function (e: any) {
+            this.errorList = [];
+
+            if (this.model.applicant.name == '') {
+                this.errorList.push('O nome é obrigatório.');
+            }
+            if (this.model.applicant.phone == '') {
+                this.errorList.push('O telefone é obrigatório.');
+            }
+            if(!this.errorList.length){
+                this.saveApplicant();
+            };
+        }
     }
 
 }

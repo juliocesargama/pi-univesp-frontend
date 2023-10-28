@@ -4,12 +4,12 @@
             <div class="card-header">
                 <div class="d-flex">
                     <h3 class="me-auto m-2">Empréstimos</h3>
-                    <select class="form-select m-2" v-model="status" style="width: 200px;" @change="setFilterStatus()">
+                    <select class="form-select m-2" v-model="status" style="width: 200px;" @change="setFilterStatus()" aria-describedby="Campo de seleção para filtrar por status de empréstimo">
                         <option value="" disabled selected>Filtro</option>
                         <option v-for="(status, index) in loanStatus" :key="status" :value="status">{{ status }}</option>
 
                     </select>
-                    <RouterLink to="/loans/create" class="btn btn-primary m-2">Novo Empréstimo</RouterLink>
+                    <RouterLink to="/loans/create" class="btn btn-primary m-2" aria-describedby="Botão para efetuar novo empréstimo">Novo Empréstimo</RouterLink>
                 </div>
             </div>
             <div class="card-body">
@@ -33,7 +33,7 @@
                             <td>{{ loan.loanStatus }}</td>
                             <td>
                                 <button type="button" v-if="loan.loanStatus != 'Devolvido'" class="btn btn-primary"
-                                    @click="setDevolution(loan.loanId)">
+                                    @click="setDevolution(loan.loanId)" aria-describedby="Botão para efetuar a devolução do empréstimo">
                                     Devolver</button>
                             </td>
                         </tr>

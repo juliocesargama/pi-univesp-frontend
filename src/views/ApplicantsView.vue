@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Requerentes
-                    <RouterLink to="/applicants/create" class="btn btn-primary float-end">Novo Requerente</RouterLink>
+                    <RouterLink to="/applicants/create" class="btn btn-primary float-end" aria-describedby="Botão para incluir novo requerente">Novo Requerente</RouterLink>
                 </h3>
             </div>
             <div class="card-body">
@@ -19,7 +19,7 @@
                         <tr v-for="applicant in applicants" :key="applicant.id">
                             <td>{{ applicant.name }}</td>
                             <td>{{ applicant.phone }}</td>
-                            <td><RouterLink :to="{path: '/applicants/'+applicant.id+'/edit'}" class="btn btn-primary">Alterar</RouterLink></td>
+                            <td><RouterLink :to="{path: '/applicants/'+applicant.id+'/edit'}" class="btn btn-primary" aria-describedby="Botão para alterar dados do requerente">Alterar</RouterLink></td>
                         </tr>
                     </tbody>
                     <tbody v-else>

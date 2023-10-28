@@ -15,10 +15,10 @@ import { RouterLink, RouterView } from 'vue-router'
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <RouterLink class="nav-link" to="/loans">Empréstimos</RouterLink>
-                <RouterLink class="nav-link" to="/items">Itens</RouterLink>
-                <RouterLink class="nav-link" to="/applicants">Requerentes</RouterLink>
-                <RouterLink class="nav-link" to="/about">Sobre</RouterLink>
+                <RouterLink class="nav-link" to="/loans" aria-current-value="Empréstimos">Empréstimos</RouterLink>
+                <RouterLink class="nav-link" to="/items" aria-current-value="Itens">Itens</RouterLink>
+                <RouterLink class="nav-link" to="/applicants" aria-current-value="Requerentes">Requerentes</RouterLink>
+                <RouterLink class="nav-link" to="/about" aria-current-value="Sobre">Sobre</RouterLink>
             </div>
           </div>
         </div>
